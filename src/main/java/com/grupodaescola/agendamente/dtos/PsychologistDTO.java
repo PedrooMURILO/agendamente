@@ -12,12 +12,17 @@ public class PsychologistDTO {
 	private String email;
 	private String password;
 	private String professionalLicense;
+	
+	private AvailibilityDTO availibility;
 
 	public PsychologistDTO() {
 	}
-
+	
 	public PsychologistDTO(Psychologist entity) {
 		BeanUtils.copyProperties(entity, this);
+		if (entity.getAvailibility() != null) {
+            this.availibility = new AvailibilityDTO(entity.getAvailibility());
+        }
 	}
 
 	public Integer getId() {
@@ -66,5 +71,13 @@ public class PsychologistDTO {
 
 	public void setProfessionalLicense(String professionalLicense) {
 		this.professionalLicense = professionalLicense;
+	}
+
+	public AvailibilityDTO getAvailibility() {
+		return availibility;
+	}
+
+	public void setAvailibility(AvailibilityDTO availibility) {
+		this.availibility = availibility;
 	}
 }

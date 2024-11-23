@@ -16,7 +16,6 @@ import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 import com.grupodaescola.agendamente.repositories.AppointmentRepository;
-import com.grupodaescola.agendamente.repositories.AvailibilityRepository;
 import com.grupodaescola.agendamente.repositories.NoteRepository;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
@@ -33,8 +32,8 @@ public class DataSeeder implements CommandLineRunner {
 	@Autowired
 	private PsychologistRepository psychologistRepository;
 	
-	@Autowired
-	private AvailibilityRepository availibilityRepository;
+	// @Autowired
+	// private AvailibilityRepository availibilityRepository;
 	
 	@Autowired
 	private NoteRepository noteRepository;
@@ -46,23 +45,18 @@ public class DataSeeder implements CommandLineRunner {
 		Patient p2 = new Patient(null, "Bianca Veronez", "(17) 99999-9999", false);
 		Patient p3 = new Patient(null, "Alice Oliveira", "(17) 99999-9999", false);
 		Patient p4 = new Patient(null, "Giovanna Peres", "(17) 99999-9999", true);
-		
 		patientRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
-		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED);
-				
+		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED);	
 		appointmentRepository.saveAll(Arrays.asList(a1));
 		
-		Psychologist psi1 = new Psychologist(null, "Doutora Bianca", "(17) 99999-9999", "biapsi@gmail.com", "123456", "06/123456");
+		Availibility av1 = new Availibility(null, LocalTime.NOON, LocalTime.MAX, Duration.ofMinutes(30));
+		Psychologist psi1 = new Psychologist(null, "Doutora Bianca", "(17) 99999-9999", "biapsi@gmail.com", "123456", "06/123456", av1);		
 		
+		// availibilityRepository.saveAll(Arrays.asList(av1));
 		psychologistRepository.saveAll(Arrays.asList(psi1));
 		
-		Availibility av1 = new Availibility(null, LocalTime.now(), LocalTime.now(), Duration.ofMinutes(30));
-		
-		availibilityRepository.saveAll(Arrays.asList(av1));
-		
 		Note n1 = new Note(null, "O cara tem depressão", LocalDateTime.now());
-		
 		noteRepository.saveAll(Arrays.asList(n1));
 	}
 }

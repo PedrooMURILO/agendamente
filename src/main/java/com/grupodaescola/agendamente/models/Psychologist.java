@@ -2,10 +2,13 @@ package com.grupodaescola.agendamente.models;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,18 +23,23 @@ public class Psychologist {
 	private String email;
 	private String password;
 	private String professionalLicense;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "availibility_id")
+	private Availibility availibility;
 
 	public Psychologist() {
 	}
 
 	public Psychologist(Integer id, String name, String phone, String email, String password,
-			String professionalLicense) {
+			String professionalLicense, Availibility availibility) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
 		this.professionalLicense = professionalLicense;
+		this.availibility = availibility;
 	}
 
 	public Integer getId() {
@@ -80,6 +88,14 @@ public class Psychologist {
 
 	public void setProfessionalLicense(String professionalLicense) {
 		this.professionalLicense = professionalLicense;
+	}
+
+	public Availibility getAvailibility() {
+		return availibility;
+	}
+
+	public void setAvailibility(Availibility availibility) {
+		this.availibility = availibility;
 	}
 
 	@Override
