@@ -5,28 +5,37 @@ import java.util.Objects;
 
 import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_appointment")
 public class Appointment {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDateTime date;
 	private AppointmentStatus appointmentStatus;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "note_id")
+	private Note note;
 
 	public Appointment() {
 	}
 
-	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus) {
+	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note) {
 		this.id = id;
 		this.date = date;
 		this.appointmentStatus = appointmentStatus;
+		this.note = note;
 	}
 
 	public Integer getId() {
@@ -51,6 +60,14 @@ public class Appointment {
 
 	public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
+	}
+
+	public Note getNote() {
+		return note;
+	}
+
+	public void setNote(Note note) {
+		this.note = note;
 	}
 
 	@Override

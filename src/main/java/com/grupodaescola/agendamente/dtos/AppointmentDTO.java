@@ -12,12 +12,17 @@ public class AppointmentDTO {
 	private Integer id;
 	private LocalDateTime date;
 	private AppointmentStatus appointmentStatus;
+	
+	private NoteDTO note;
 
 	public AppointmentDTO() {
 	}
 
 	public AppointmentDTO(Appointment entity) {
 		BeanUtils.copyProperties(entity, this);
+		if (entity.getNote() != null) {
+			this.note = new NoteDTO(entity.getNote());
+		}
 	}
 
 	public Integer getId() {
@@ -42,5 +47,13 @@ public class AppointmentDTO {
 
 	public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
+	}
+
+	public NoteDTO getNote() {
+		return note;
+	}
+
+	public void setNote(NoteDTO note) {
+		this.note = note;
 	}
 }
