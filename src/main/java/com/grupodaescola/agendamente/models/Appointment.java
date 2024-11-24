@@ -32,16 +32,21 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+	
+	@ManyToOne
+	@JoinColumn(name = "psychologist_id")
+	private Psychologist psychologist;
 
 	public Appointment() {
 	}
 
-	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note, Patient patient) {
+	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note, Patient patient, Psychologist psychologist) {
 		this.id = id;
 		this.date = date;
 		this.appointmentStatus = appointmentStatus;
 		this.note = note;
 		this.patient = patient;
+		this.psychologist = psychologist;
 	}
 
 	public Integer getId() {
@@ -82,6 +87,14 @@ public class Appointment {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Psychologist getPsychologist() {
+		return psychologist;
+	}
+
+	public void setPsychologist(Psychologist psychologist) {
+		this.psychologist = psychologist;
 	}
 
 	@Override

@@ -16,6 +16,8 @@ public class AppointmentDTO {
 	private NoteDTO note;
 	
 	private PatientMinDTO patient;
+	
+	private PsychologistMinDTO psychologist;
 
 	public AppointmentDTO() {
 	}
@@ -27,6 +29,9 @@ public class AppointmentDTO {
 		}
 		if (entity.getPatient() != null) {
 			this.patient = new PatientMinDTO(entity.getPatient());
+		}
+		if (entity.getPsychologist() != null) {
+			this.psychologist = new PsychologistMinDTO(entity.getPsychologist());
 		}
 	}
 
@@ -68,5 +73,13 @@ public class AppointmentDTO {
 
 	public void setPatient(PatientMinDTO patient) {
 		this.patient = patient;
+	}
+
+	public PsychologistMinDTO getPsychologist() {
+		return psychologist;
+	}
+
+	public void setPsychologist(PsychologistMinDTO psychologist) {
+		this.psychologist = psychologist;
 	}
 }

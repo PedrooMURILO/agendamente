@@ -54,7 +54,7 @@ public class DataSeeder implements CommandLineRunner {
 		psychologistRepository.saveAll(Arrays.asList(psi1));
 		
 		Note n1 = new Note(null, "O cara tem depressão", LocalDateTime.now());
-		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED, n1, p1);	
+		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED, n1, p1, psi1);	
 
 		// noteRepository.saveAll(Arrays.asList(n1));
 		appointmentRepository.saveAll(Arrays.asList(a1));

@@ -1,7 +1,11 @@
 package com.grupodaescola.agendamente.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
+import com.grupodaescola.agendamente.models.Appointment;
 import com.grupodaescola.agendamente.models.Psychologist;
 
 public class PsychologistDTO {
@@ -14,6 +18,8 @@ public class PsychologistDTO {
 	private String professionalLicense;
 	
 	private AvailibilityDTO availibility;
+	
+	private List<AppointmentMinDTO> appointments = new ArrayList<>();
 
 	public PsychologistDTO() {
 	}
@@ -23,6 +29,11 @@ public class PsychologistDTO {
 		if (entity.getAvailibility() != null) {
             this.availibility = new AvailibilityDTO(entity.getAvailibility());
         }
+		if (entity.getAppointments() != null) {
+		    for (Appointment appointment : entity.getAppointments()) {
+		        this.appointments.add(new AppointmentMinDTO(appointment));
+		    }
+		}
 	}
 
 	public Integer getId() {
@@ -79,5 +90,9 @@ public class PsychologistDTO {
 
 	public void setAvailibility(AvailibilityDTO availibility) {
 		this.availibility = availibility;
+	}
+
+	public List<AppointmentMinDTO> getAppointments() {
+		return appointments;
 	}
 }
