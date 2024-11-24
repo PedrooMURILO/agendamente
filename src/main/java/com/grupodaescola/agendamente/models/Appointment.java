@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -27,15 +28,20 @@ public class Appointment {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "note_id")
 	private Note note;
+	
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
+	private Patient patient;
 
 	public Appointment() {
 	}
 
-	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note) {
+	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note, Patient patient) {
 		this.id = id;
 		this.date = date;
 		this.appointmentStatus = appointmentStatus;
 		this.note = note;
+		this.patient = patient;
 	}
 
 	public Integer getId() {
@@ -68,6 +74,14 @@ public class Appointment {
 
 	public void setNote(Note note) {
 		this.note = note;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	@Override

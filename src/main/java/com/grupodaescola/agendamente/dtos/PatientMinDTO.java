@@ -1,32 +1,22 @@
 package com.grupodaescola.agendamente.dtos;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.BeanUtils;
-
-import com.grupodaescola.agendamente.models.Appointment;
 import com.grupodaescola.agendamente.models.Patient;
 
-public class PatientDTO {
+public class PatientMinDTO {
 
 	private Integer id;
 	private String name;
 	private String phone;
 	private boolean whatsapp;
-
-	private List<AppointmentMinDTO> appointments = new ArrayList<>();
-
-	public PatientDTO() {
+	
+	public PatientMinDTO() {
 	}
-
-	public PatientDTO(Patient entity) {
-		BeanUtils.copyProperties(entity, this);
-		if (entity.getAppointments() != null) {
-		    for (Appointment appointment : entity.getAppointments()) {
-		        this.appointments.add(new AppointmentMinDTO(appointment));
-		    }
-		}
+	
+	public PatientMinDTO(Patient entity) {
+		this.id = entity.getId();
+		this.name = entity.getName();
+		this.phone = entity.getPhone();
+		this.whatsapp = entity.isWhatsapp();
 	}
 
 	public Integer getId() {
@@ -59,9 +49,5 @@ public class PatientDTO {
 
 	public void setWhatsapp(boolean whatsapp) {
 		this.whatsapp = whatsapp;
-	}
-
-	public List<AppointmentMinDTO> getAppointments() {
-		return appointments;
 	}
 }

@@ -14,6 +14,8 @@ public class AppointmentDTO {
 	private AppointmentStatus appointmentStatus;
 	
 	private NoteDTO note;
+	
+	private PatientMinDTO patient;
 
 	public AppointmentDTO() {
 	}
@@ -22,6 +24,9 @@ public class AppointmentDTO {
 		BeanUtils.copyProperties(entity, this);
 		if (entity.getNote() != null) {
 			this.note = new NoteDTO(entity.getNote());
+		}
+		if (entity.getPatient() != null) {
+			this.patient = new PatientMinDTO(entity.getPatient());
 		}
 	}
 
@@ -55,5 +60,13 @@ public class AppointmentDTO {
 
 	public void setNote(NoteDTO note) {
 		this.note = note;
+	}
+
+	public PatientMinDTO getPatient() {
+		return patient;
+	}
+
+	public void setPatient(PatientMinDTO patient) {
+		this.patient = patient;
 	}
 }
