@@ -1,6 +1,7 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,10 @@ public class PatientService {
 	public List<PatientDTO> findAll() {
 		List<Patient> list = patientRepository.findAll();
 		return list.stream().map(x -> new PatientDTO(x)).toList();
+	}
+	
+	public PatientDTO findById(Integer id) {
+		Optional<Patient> patient = patientRepository.findById(id);
+		return new PatientDTO(patient.get());
 	}
 }
