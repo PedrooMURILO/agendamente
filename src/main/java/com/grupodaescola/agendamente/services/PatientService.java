@@ -25,4 +25,9 @@ public class PatientService {
 		Optional<Patient> patient = patientRepository.findById(id);
 		return new PatientDTO(patient.get());
 	}
+	
+	public PatientDTO insert(Patient patient) {
+		Patient savedPatient = patientRepository.save(patient);
+		return new PatientDTO(savedPatient);
+	}
 }
