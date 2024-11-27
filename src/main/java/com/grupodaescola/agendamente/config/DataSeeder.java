@@ -1,7 +1,7 @@
 package com.grupodaescola.agendamente.config;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -49,7 +49,7 @@ public class DataSeeder implements CommandLineRunner {
 		// availibilityRepository.saveAll(Arrays.asList(av1));
 		psychologistRepository.saveAll(Arrays.asList(psi1));
 		
-		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED, p1, psi1);	
+		Appointment a1 = new Appointment(null, LocalDate.of(2024, 12, 12), LocalTime.of(10, 30), AppointmentStatus.COMPLETED, true, p1, psi1);	
 		appointmentRepository.saveAll(Arrays.asList(a1));
 	}
 }

@@ -1,6 +1,7 @@
 package com.grupodaescola.agendamente.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.beans.BeanUtils;
 
@@ -10,7 +11,8 @@ import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 public class AppointmentDTO {
 
 	private Integer id;
-	private LocalDateTime date;
+	private LocalDate date;
+	private LocalTime time;
 	private AppointmentStatus appointmentStatus;
 	
 	private PatientMinDTO patient;
@@ -38,12 +40,20 @@ public class AppointmentDTO {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
 	}
 
 	public AppointmentStatus getAppointmentStatus() {
