@@ -6,6 +6,7 @@ public class PsychologistMinDTO {
 
 	private Integer id;
 	private String name;
+	private String businessName;
 
 	public PsychologistMinDTO() {
 	}
@@ -29,5 +30,13 @@ public class PsychologistMinDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 }

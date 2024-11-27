@@ -12,6 +12,7 @@ public class PsychologistDTO {
 
 	private Integer id;
 	private String name;
+	private String businessName;
 	private String phone;
 	private String email;
 	private String password;
@@ -90,6 +91,14 @@ public class PsychologistDTO {
 
 	public void setAvailibility(AvailibilityDTO availibility) {
 		this.availibility = availibility;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 
 	public List<AppointmentMinDTO> getAppointments() {

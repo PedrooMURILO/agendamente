@@ -23,6 +23,7 @@ public class Psychologist {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String businessName;
 	private String phone;
 	private String email;
 	private String password;
@@ -38,10 +39,11 @@ public class Psychologist {
 	public Psychologist() {
 	}
 
-	public Psychologist(Integer id, String name, String phone, String email, String password,
+	public Psychologist(Integer id, String name, String businessName, String phone, String email, String password,
 			String professionalLicense, Availibility availibility) {
 		this.id = id;
 		this.name = name;
+		this.businessName = businessName;
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
@@ -103,6 +105,14 @@ public class Psychologist {
 
 	public void setAvailibility(Availibility availibility) {
 		this.availibility = availibility;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 
 	public List<Appointment> getAppointments() {

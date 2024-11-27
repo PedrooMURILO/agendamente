@@ -56,7 +56,7 @@ public class DataSeeder implements CommandLineRunner {
 		av1.addSchedule(w2);
 		av1.addSchedule(w3);
 		
-		Psychologist psi1 = new Psychologist(null, "Doutora Bianca", "(17) 99999-9999", "biapsi@gmail.com", "123456", "06/123456", av1);		
+		Psychologist psi1 = new Psychologist(null, "Doutora Bianca", "Bianca Cuida da Mente", "(17) 99999-9999", "biapsi@gmail.com", "123456", "06/123456", av1);		
 		
 		// availibilityRepository.saveAll(Arrays.asList(av1));
 		psychologistRepository.saveAll(Arrays.asList(psi1));
