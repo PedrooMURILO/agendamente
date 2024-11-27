@@ -11,7 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,12 +28,17 @@ public class Availibility {
 	@OneToMany(mappedBy = "availibility", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<WorkSchedule> schedules = new ArrayList<>();
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "psychologist_id")
+	private Psychologist psychologist;
+	
 	public Availibility() {
 	}
 
-	public Availibility(Integer id, Duration duration) {
+	public Availibility(Integer id, Duration duration, Psychologist psychologist) {
 		this.id = id;
 		this.duration = duration;
+		this.psychologist = psychologist;
 	}
 
 	public Integer getId() {
@@ -48,6 +55,14 @@ public class Availibility {
 
 	public void setDuration(Duration duration) {
 		this.duration = duration;
+	}
+
+	public Psychologist getPsychologist() {
+		return psychologist;
+	}
+
+	public void setPsychologist(Psychologist psychologist) {
+		this.psychologist = psychologist;
 	}
 
 	public List<WorkSchedule> getSchedules() {

@@ -15,6 +15,8 @@ public class AvailibilityDTO {
 	private Duration duration;
 
 	private List<WorkScheduleDTO> schedules = new ArrayList<>();
+	
+	private PsychologistMinDTO psychologist;
 
 	public AvailibilityDTO() {
 	}
@@ -25,6 +27,9 @@ public class AvailibilityDTO {
 			for (WorkSchedule schedule : entity.getSchedules()) {
 				this.schedules.add(new WorkScheduleDTO(schedule));
 			}
+		}
+		if (entity.getPsychologist() != null) {
+			this.psychologist = new PsychologistMinDTO(entity.getPsychologist());
 		}
 	}
 
@@ -46,5 +51,13 @@ public class AvailibilityDTO {
 
 	public void setDuration(Duration duration) {
 		this.duration = duration;
+	}
+
+	public PsychologistMinDTO getPsychologist() {
+		return psychologist;
+	}
+
+	public void setPsychologist(PsychologistMinDTO psychologist) {
+		this.psychologist = psychologist;
 	}
 }

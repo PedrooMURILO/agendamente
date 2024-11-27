@@ -14,6 +14,7 @@ public class PsychologistMinDTO {
 	public PsychologistMinDTO(Psychologist entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
+		this.businessName = entity.getBusinessName();
 	}
 
 	public Integer getId() {
