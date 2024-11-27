@@ -20,8 +20,7 @@ public class Patient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	private String phone;
-	private boolean whatsapp;
+	private String whatsapp;
 	
 	@OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
 	private List<Appointment> appointments = new ArrayList<>();
@@ -29,10 +28,10 @@ public class Patient {
 	public Patient() {
 	}
 
-	public Patient(Integer id, String name, String phone, boolean whatsapp) {
+	public Patient(Integer id, String name, String whatsapp) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.phone = phone;
 		this.whatsapp = whatsapp;
 	}
 
@@ -52,19 +51,11 @@ public class Patient {
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public boolean isWhatsapp() {
+	public String getWhatsapp() {
 		return whatsapp;
 	}
 
-	public void setWhatsapp(boolean whatsapp) {
+	public void setWhatsapp(String whatsapp) {
 		this.whatsapp = whatsapp;
 	}
 

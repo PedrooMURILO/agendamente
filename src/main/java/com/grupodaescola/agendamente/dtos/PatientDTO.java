@@ -13,7 +13,7 @@ public class PatientDTO {
 	private Integer id;
 	private String name;
 	private String phone;
-	private boolean whatsapp;
+	private Boolean whatsapp;
 
 	private List<AppointmentMinDTO> appointments = new ArrayList<>();
 
@@ -53,11 +53,11 @@ public class PatientDTO {
 		this.phone = phone;
 	}
 
-	public boolean isWhatsapp() {
+	public Boolean getWhatsapp() {
 		return whatsapp;
 	}
 
-	public void setWhatsapp(boolean whatsapp) {
+	public void setWhatsapp(Boolean whatsapp) {
 		this.whatsapp = whatsapp;
 	}
 

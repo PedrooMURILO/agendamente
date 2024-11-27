@@ -45,7 +45,6 @@ public class PatientService {
 	
 	private void updateData(Patient existingPatient, Patient patient) {
 		existingPatient.setName(patient.getName());
-		existingPatient.setPhone(patient.getPhone());
-		existingPatient.setWhatsapp(patient.isWhatsapp());
+		existingPatient.setWhatsapp(patient.getWhatsapp());
 	}
 }

@@ -6,8 +6,7 @@ public class PatientMinDTO {
 
 	private Integer id;
 	private String name;
-	private String phone;
-	private boolean whatsapp;
+	private String whatsapp;
 	
 	public PatientMinDTO() {
 	}
@@ -15,8 +14,7 @@ public class PatientMinDTO {
 	public PatientMinDTO(Patient entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
-		this.phone = entity.getPhone();
-		this.whatsapp = entity.isWhatsapp();
+		this.whatsapp = entity.getWhatsapp();
 	}
 
 	public Integer getId() {
@@ -35,19 +33,11 @@ public class PatientMinDTO {
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public boolean isWhatsapp() {
+	public String getWhatsapp() {
 		return whatsapp;
 	}
 
-	public void setWhatsapp(boolean whatsapp) {
+	public void setWhatsapp(String whatsapp) {
 		this.whatsapp = whatsapp;
 	}
 }
