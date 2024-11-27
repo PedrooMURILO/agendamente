@@ -1,13 +1,17 @@
 package com.grupodaescola.agendamente.models;
 
 import java.time.Duration;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,17 +21,16 @@ public class Availibility {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalTime startTime;
-	private LocalTime endTime;
 	private Duration duration;
 	
+	@OneToMany(mappedBy = "availibility", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<WorkSchedule> schedules = new ArrayList<>();
+
 	public Availibility() {
 	}
 
-	public Availibility(Integer id, LocalTime startTime, LocalTime endTime, Duration duration) {
+	public Availibility(Integer id, Duration duration) {
 		this.id = id;
-		this.startTime = startTime;
-		this.endTime = endTime;
 		this.duration = duration;
 	}
 
@@ -39,22 +42,6 @@ public class Availibility {
 		this.id = id;
 	}
 
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-
 	public Duration getDuration() {
 		return duration;
 	}
@@ -62,6 +49,20 @@ public class Availibility {
 	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
+
+	public List<WorkSchedule> getSchedules() {
+		return schedules;
+	}
+	
+	public void addSchedule(WorkSchedule schedule) {
+		schedules.add(schedule);
+		schedule.setAvailibility(this);
+	}
+	
+	public void removeSchedule(WorkSchedule schedule) {
+        schedules.remove(schedule);
+        schedule.setAvailibility(null);
+    }
 
 	@Override
 	public int hashCode() {

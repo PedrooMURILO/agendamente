@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +24,10 @@ public class WorkSchedule {
 	private LocalTime morningEndTime;
 	private LocalTime afternoonStartTime ;
 	private LocalTime afternoonEndTime;
+	
+	@ManyToOne
+	@JoinColumn(name = "availibility_id", nullable = false)
+	private Availibility availibility;
 	
 	public WorkSchedule () {
 	}
@@ -82,6 +88,14 @@ public class WorkSchedule {
 
 	public void setAfternoonEndTime(LocalTime afternoonEndTime) {
 		this.afternoonEndTime = afternoonEndTime;
+	}
+
+	public Availibility getAvailibility() {
+		return availibility;
+	}
+
+	public void setAvailibility(Availibility availibility) {
+		this.availibility = availibility;
 	}
 
 	@Override

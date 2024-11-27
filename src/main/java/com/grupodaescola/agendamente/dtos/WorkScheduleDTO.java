@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grupodaescola.agendamente.models.WorkSchedule;
 
 public class WorkScheduleDTO {
@@ -15,6 +16,9 @@ public class WorkScheduleDTO {
 	private LocalTime morningEndTime;
 	private LocalTime afternoonStartTime ;
 	private LocalTime afternoonEndTime;
+	
+	@JsonIgnore
+	private AvailibilityDTO availibility;
 	
 	public WorkScheduleDTO() {
 	}
@@ -69,5 +73,13 @@ public class WorkScheduleDTO {
 
 	public void setAfternoonEndTime(LocalTime afternoonEndTime) {
 		this.afternoonEndTime = afternoonEndTime;
+	}
+
+	public AvailibilityDTO getAvailibility() {
+		return availibility;
+	}
+
+	public void setAvailibility(AvailibilityDTO availibility) {
+		this.availibility = availibility;
 	}
 }

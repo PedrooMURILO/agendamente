@@ -19,7 +19,6 @@ import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 import com.grupodaescola.agendamente.repositories.AppointmentRepository;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
-import com.grupodaescola.agendamente.repositories.WorkScheduleRepository;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -36,8 +35,8 @@ public class DataSeeder implements CommandLineRunner {
 	// @Autowired
 	// private AvailibilityRepository availibilityRepository;
 	
-	@Autowired
-	private WorkScheduleRepository workScheduleRepository;
+	// @Autowired
+	// private WorkScheduleRepository workScheduleRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -48,8 +47,15 @@ public class DataSeeder implements CommandLineRunner {
 		Patient p4 = new Patient(null, "Giovanna Peres", "(17) 99999-9999");
 		patientRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
+		WorkSchedule w1 = new WorkSchedule(null, DayOfWeek.TUESDAY, LocalTime.of(8, 00), LocalTime.of(11, 00), LocalTime.of(13, 00), LocalTime.of(18, 00));
+		WorkSchedule w2 = new WorkSchedule(null, DayOfWeek.THURSDAY, LocalTime.of(8, 00), LocalTime.of(11, 00), LocalTime.of(13, 00), LocalTime.of(18, 00));
+		WorkSchedule w3 = new WorkSchedule(null, DayOfWeek.SATURDAY, LocalTime.of(8, 00), LocalTime.of(11, 00), LocalTime.of(13, 00), LocalTime.of(18, 00));	
 		
-		Availibility av1 = new Availibility(null, LocalTime.NOON, LocalTime.MAX, Duration.ofMinutes(30));
+		Availibility av1 = new Availibility(null, Duration.ofMinutes(30));
+		av1.addSchedule(w1);
+		av1.addSchedule(w2);
+		av1.addSchedule(w3);
+		
 		Psychologist psi1 = new Psychologist(null, "Doutora Bianca", "(17) 99999-9999", "biapsi@gmail.com", "123456", "06/123456", av1);		
 		
 		// availibilityRepository.saveAll(Arrays.asList(av1));
@@ -58,7 +64,5 @@ public class DataSeeder implements CommandLineRunner {
 		Appointment a1 = new Appointment(null, LocalDate.of(2024, 12, 12), LocalTime.of(10, 30), AppointmentStatus.COMPLETED, true, p1, psi1);	
 		appointmentRepository.saveAll(Arrays.asList(a1));
 		
-		WorkSchedule w1 = new WorkSchedule(null, DayOfWeek.FRIDAY, LocalTime.of(8, 00), LocalTime.of(11, 00), LocalTime.of(13, 00), LocalTime.of(18, 00));
-		workScheduleRepository.saveAll(Arrays.asList(w1));
 	}
 }
