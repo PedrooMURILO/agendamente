@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.grupodaescola.agendamente.models.Appointment;
 import com.grupodaescola.agendamente.models.Availibility;
-import com.grupodaescola.agendamente.models.Note;
 import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
@@ -34,9 +33,6 @@ public class DataSeeder implements CommandLineRunner {
 	// @Autowired
 	// private AvailibilityRepository availibilityRepository;
 	
-	// @Autowired
-	// private NoteRepository noteRepository;
-	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -53,10 +49,7 @@ public class DataSeeder implements CommandLineRunner {
 		// availibilityRepository.saveAll(Arrays.asList(av1));
 		psychologistRepository.saveAll(Arrays.asList(psi1));
 		
-		Note n1 = new Note(null, "O cara tem depressão", LocalDateTime.now());
-		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED, n1, p1, psi1);	
-
-		// noteRepository.saveAll(Arrays.asList(n1));
+		Appointment a1 = new Appointment(null, LocalDateTime.now(), AppointmentStatus.COMPLETED, p1, psi1);	
 		appointmentRepository.saveAll(Arrays.asList(a1));
 	}
 }

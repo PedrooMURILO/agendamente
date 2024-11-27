@@ -13,8 +13,6 @@ public class AppointmentDTO {
 	private LocalDateTime date;
 	private AppointmentStatus appointmentStatus;
 	
-	private NoteDTO note;
-	
 	private PatientMinDTO patient;
 	
 	private PsychologistMinDTO psychologist;
@@ -24,9 +22,6 @@ public class AppointmentDTO {
 
 	public AppointmentDTO(Appointment entity) {
 		BeanUtils.copyProperties(entity, this);
-		if (entity.getNote() != null) {
-			this.note = new NoteDTO(entity.getNote());
-		}
 		if (entity.getPatient() != null) {
 			this.patient = new PatientMinDTO(entity.getPatient());
 		}
@@ -57,14 +52,6 @@ public class AppointmentDTO {
 
 	public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
-	}
-
-	public NoteDTO getNote() {
-		return note;
-	}
-
-	public void setNote(NoteDTO note) {
-		this.note = note;
 	}
 
 	public PatientMinDTO getPatient() {

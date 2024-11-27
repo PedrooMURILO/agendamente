@@ -5,14 +5,12 @@ import java.util.Objects;
 
 import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,10 +23,6 @@ public class Appointment {
 	private LocalDateTime date;
 	private AppointmentStatus appointmentStatus;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "note_id")
-	private Note note;
-	
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
@@ -40,11 +34,10 @@ public class Appointment {
 	public Appointment() {
 	}
 
-	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Note note, Patient patient, Psychologist psychologist) {
+	public Appointment(Integer id, LocalDateTime date, AppointmentStatus appointmentStatus, Patient patient, Psychologist psychologist) {
 		this.id = id;
 		this.date = date;
 		this.appointmentStatus = appointmentStatus;
-		this.note = note;
 		this.patient = patient;
 		this.psychologist = psychologist;
 	}
@@ -71,14 +64,6 @@ public class Appointment {
 
 	public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
-	}
-
-	public Note getNote() {
-		return note;
-	}
-
-	public void setNote(Note note) {
-		this.note = note;
 	}
 
 	public Patient getPatient() {
