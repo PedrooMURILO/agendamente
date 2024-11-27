@@ -1,5 +1,6 @@
 package com.grupodaescola.agendamente.config;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,10 +14,12 @@ import com.grupodaescola.agendamente.models.Appointment;
 import com.grupodaescola.agendamente.models.Availibility;
 import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.models.Psychologist;
+import com.grupodaescola.agendamente.models.WorkSchedule;
 import com.grupodaescola.agendamente.models.enums.AppointmentStatus;
 import com.grupodaescola.agendamente.repositories.AppointmentRepository;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
+import com.grupodaescola.agendamente.repositories.WorkScheduleRepository;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -32,6 +35,9 @@ public class DataSeeder implements CommandLineRunner {
 	
 	// @Autowired
 	// private AvailibilityRepository availibilityRepository;
+	
+	@Autowired
+	private WorkScheduleRepository workScheduleRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -51,5 +57,8 @@ public class DataSeeder implements CommandLineRunner {
 		
 		Appointment a1 = new Appointment(null, LocalDate.of(2024, 12, 12), LocalTime.of(10, 30), AppointmentStatus.COMPLETED, true, p1, psi1);	
 		appointmentRepository.saveAll(Arrays.asList(a1));
+		
+		WorkSchedule w1 = new WorkSchedule(null, DayOfWeek.FRIDAY, LocalTime.of(8, 00), LocalTime.of(11, 00), LocalTime.of(13, 00), LocalTime.of(18, 00));
+		workScheduleRepository.saveAll(Arrays.asList(w1));
 	}
 }
