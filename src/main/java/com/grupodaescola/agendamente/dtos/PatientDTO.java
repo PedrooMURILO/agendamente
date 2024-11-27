@@ -12,8 +12,7 @@ public class PatientDTO {
 
 	private Integer id;
 	private String name;
-	private String phone;
-	private Boolean whatsapp;
+	private String whatsapp;
 
 	private List<AppointmentMinDTO> appointments = new ArrayList<>();
 
@@ -45,19 +44,11 @@ public class PatientDTO {
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Boolean getWhatsapp() {
+	public String getWhatsapp() {
 		return whatsapp;
 	}
 
-	public void setWhatsapp(Boolean whatsapp) {
+	public void setWhatsapp(String whatsapp) {
 		this.whatsapp = whatsapp;
 	}
 
