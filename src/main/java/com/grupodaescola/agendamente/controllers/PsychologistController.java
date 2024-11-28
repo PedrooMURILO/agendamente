@@ -13,7 +13,7 @@ import com.grupodaescola.agendamente.dtos.PsychologistDTO;
 import com.grupodaescola.agendamente.services.PsychologistService;
 
 @RestController
-@RequestMapping(value = "psychologists")
+@RequestMapping(value = "/psychologists")
 public class PsychologistController {
 
 	@Autowired
