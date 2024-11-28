@@ -17,25 +17,25 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_availibility")
-public class Availibility {
+@Table(name = "tb_availability")
+public class Availability {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Duration duration;
 	
-	@OneToMany(mappedBy = "availibility", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "availability", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<WorkSchedule> schedules = new ArrayList<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "psychologist_id")
 	private Psychologist psychologist;
 	
-	public Availibility() {
+	public Availability() {
 	}
 
-	public Availibility(Integer id, Duration duration, Psychologist psychologist) {
+	public Availability(Integer id, Duration duration, Psychologist psychologist) {
 		this.id = id;
 		this.duration = duration;
 		this.psychologist = psychologist;
@@ -71,12 +71,12 @@ public class Availibility {
 	
 	public void addSchedule(WorkSchedule schedule) {
 		schedules.add(schedule);
-		schedule.setAvailibility(this);
+		schedule.setAvailability(this);
 	}
 	
 	public void removeSchedule(WorkSchedule schedule) {
         schedules.remove(schedule);
-        schedule.setAvailibility(null);
+        schedule.setAvailability(null);
     }
 
 	@Override
@@ -92,7 +92,7 @@ public class Availibility {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Availibility other = (Availibility) obj;
+		Availability other = (Availability) obj;
 		return Objects.equals(id, other.id);
 	}
 }

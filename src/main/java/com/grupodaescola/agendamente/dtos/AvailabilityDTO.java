@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.grupodaescola.agendamente.models.Availibility;
+import com.grupodaescola.agendamente.models.Availability;
 import com.grupodaescola.agendamente.models.WorkSchedule;
 
-public class AvailibilityDTO {
+public class AvailabilityDTO {
 
 	private Integer id;
 	private Duration duration;
@@ -18,10 +18,10 @@ public class AvailibilityDTO {
 	
 	private PsychologistMinDTO psychologist;
 
-	public AvailibilityDTO() {
+	public AvailabilityDTO() {
 	}
 
-	public AvailibilityDTO(Availibility entity) {
+	public AvailabilityDTO(Availability entity) {
 		BeanUtils.copyProperties(entity, this);
 		if (entity.getSchedules() != null) {
 			for (WorkSchedule schedule : entity.getSchedules()) {

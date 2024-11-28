@@ -28,7 +28,7 @@ public class Psychologist {
 	private String professionalLicense;
 	
 	@OneToOne(mappedBy = "psychologist")
-	private Availibility availibility;
+	private Availability availability;
 	
 	@OneToMany(mappedBy = "psychologist", fetch = FetchType.EAGER)
 	private List<Appointment> appointments = new ArrayList<>();
@@ -95,12 +95,12 @@ public class Psychologist {
 		this.professionalLicense = professionalLicense;
 	}
 
-	public Availibility getAvailibility() {
-		return availibility;
+	public Availability getAvailability() {
+		return availability;
 	}
 
-	public void setAvailibility(Availibility availibility) {
-		this.availibility = availibility;
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
 	}
 
 	public String getBusinessName() {

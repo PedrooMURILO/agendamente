@@ -18,7 +18,7 @@ public class PsychologistDTO {
 	private String password;
 	private String professionalLicense;
 	
-	private AvailibilityDTO availibility;
+	private AvailabilityDTO availability;
 	
 	private List<AppointmentMinDTO> appointments = new ArrayList<>();
 
@@ -27,8 +27,8 @@ public class PsychologistDTO {
 	
 	public PsychologistDTO(Psychologist entity) {
 		BeanUtils.copyProperties(entity, this);
-		if (entity.getAvailibility() != null) {
-            this.availibility = new AvailibilityDTO(entity.getAvailibility());
+		if (entity.getAvailability() != null) {
+            this.availability = new AvailabilityDTO(entity.getAvailability());
         }
 		if (entity.getAppointments() != null) {
 		    for (Appointment appointment : entity.getAppointments()) {
@@ -85,12 +85,12 @@ public class PsychologistDTO {
 		this.professionalLicense = professionalLicense;
 	}
 
-	public AvailibilityDTO getAvailibility() {
-		return availibility;
+	public AvailabilityDTO getavailability() {
+		return availability;
 	}
 
-	public void setAvailibility(AvailibilityDTO availibility) {
-		this.availibility = availibility;
+	public void setavailability(AvailabilityDTO availability) {
+		this.availability = availability;
 	}
 
 	public String getBusinessName() {

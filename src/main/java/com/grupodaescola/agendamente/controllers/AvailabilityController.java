@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupodaescola.agendamente.dtos.AvailibilityDTO;
-import com.grupodaescola.agendamente.services.AvailibilityService;
+import com.grupodaescola.agendamente.dtos.AvailabilityDTO;
+import com.grupodaescola.agendamente.services.AvailabilityService;
 
 @RestController
-@RequestMapping(value = "/availibilitys")
-public class AvailibilityController {
+@RequestMapping(value = "/availabilitys")
+public class AvailabilityController {
 	
 	@Autowired
-	private AvailibilityService availibilityService;
+	private AvailabilityService availabilityService;
 
 	@GetMapping
-	public ResponseEntity<List<AvailibilityDTO>> findAll() {
-		List<AvailibilityDTO> availibilityList = availibilityService.findAll();
-		return ResponseEntity.status(HttpStatus.OK).body(availibilityList);
+	public ResponseEntity<List<AvailabilityDTO>> findAll() {
+		List<AvailabilityDTO> availabilityList = availabilityService.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body(availabilityList);
 	}
 }

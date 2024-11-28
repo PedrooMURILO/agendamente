@@ -18,7 +18,7 @@ public class WorkScheduleDTO {
 	private LocalTime afternoonEndTime;
 	
 	@JsonIgnore
-	private AvailibilityDTO availibility;
+	private AvailabilityDTO availability;
 	
 	public WorkScheduleDTO() {
 	}
@@ -75,11 +75,11 @@ public class WorkScheduleDTO {
 		this.afternoonEndTime = afternoonEndTime;
 	}
 
-	public AvailibilityDTO getAvailibility() {
-		return availibility;
+	public AvailabilityDTO getAvailability() {
+		return availability;
 	}
 
-	public void setAvailibility(AvailibilityDTO availibility) {
-		this.availibility = availibility;
+	public void setAvailability(AvailabilityDTO availability) {
+		this.availability = availability;
 	}
 }

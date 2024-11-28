@@ -26,8 +26,8 @@ public class WorkSchedule {
 	private LocalTime afternoonEndTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "availibility_id", nullable = false)
-	private Availibility availibility;
+	@JoinColumn(name = "availability_id", nullable = false)
+	private Availability availability;
 	
 	public WorkSchedule () {
 	}
@@ -90,12 +90,12 @@ public class WorkSchedule {
 		this.afternoonEndTime = afternoonEndTime;
 	}
 
-	public Availibility getAvailibility() {
-		return availibility;
+	public Availability getAvailability() {
+		return availability;
 	}
 
-	public void setAvailibility(Availibility availibility) {
-		this.availibility = availibility;
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
 	}
 
 	@Override
