@@ -28,8 +28,8 @@ public class Availability {
 	@OneToMany(mappedBy = "availability", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<WorkSchedule> schedules = new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "psychologist_id")
+	@OneToOne
+	@JoinColumn(name = "psychologist_id", nullable = false)
 	private Psychologist psychologist;
 	
 	public Availability() {
