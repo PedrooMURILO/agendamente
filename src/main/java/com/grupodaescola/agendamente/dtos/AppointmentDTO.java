@@ -14,6 +14,7 @@ public class AppointmentDTO {
 	private LocalDate date;
 	private LocalTime time;
 	private AppointmentStatus appointmentStatus;
+	private Boolean isActive = true;
 	
 	private PatientMinDTO patient;
 	
@@ -78,5 +79,13 @@ public class AppointmentDTO {
 
 	public void setPsychologist(PsychologistMinDTO psychologist) {
 		this.psychologist = psychologist;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 }
