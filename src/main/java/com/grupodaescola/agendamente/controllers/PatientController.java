@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupodaescola.agendamente.dtos.PatientDTO;
-import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.services.PatientService;
 
 @RestController
@@ -38,7 +37,7 @@ public class PatientController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PatientDTO> insert(@RequestBody Patient patient) {
+	public ResponseEntity<PatientDTO> insert(@RequestBody PatientDTO patient) {
 		PatientDTO savedPatient = patientService.insert(patient);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedPatient);
 	}
@@ -50,7 +49,7 @@ public class PatientController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PatientDTO> update(@PathVariable Integer id, @RequestBody Patient patient) {
+	public ResponseEntity<PatientDTO> update(@PathVariable Integer id, @RequestBody PatientDTO patient) {
 	    PatientDTO updatedPatient = patientService.update(id, patient);
 	    return ResponseEntity.status(HttpStatus.OK).body(updatedPatient);
 	}

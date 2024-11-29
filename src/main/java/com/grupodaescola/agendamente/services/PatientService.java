@@ -3,6 +3,7 @@ package com.grupodaescola.agendamente.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +28,10 @@ public class PatientService {
 		return new PatientDTO(patient.get());
 	}
 	
-	public PatientDTO insert(Patient patient) {
-		Patient savedPatient = patientRepository.save(patient);
+	public PatientDTO insert(PatientDTO patient) {
+		Patient savedPatient = new Patient();
+		BeanUtils.copyProperties(patient, savedPatient);
+		savedPatient = patientRepository.save(savedPatient);
 		return new PatientDTO(savedPatient);
 	}
 	
@@ -37,13 +40,13 @@ public class PatientService {
 	}
 	
 	@Transactional
-	public PatientDTO update(Integer id, Patient patient) {
+	public PatientDTO update(Integer id, PatientDTO patient) {
 		Patient existingPatient = patientRepository.getReferenceById(id);
 		updateData(existingPatient, patient);
 		return new PatientDTO(patientRepository.save(existingPatient));
 	}
 	
-	private void updateData(Patient existingPatient, Patient patient) {
+	private void updateData(Patient existingPatient, PatientDTO patient) {
 		existingPatient.setName(patient.getName());
 		existingPatient.setWhatsapp(patient.getWhatsapp());
 	}
