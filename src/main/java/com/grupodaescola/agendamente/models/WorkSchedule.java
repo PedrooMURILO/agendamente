@@ -33,13 +33,14 @@ public class WorkSchedule {
 	}
 
 	public WorkSchedule(Integer id, DayOfWeek dayOfWeek, LocalTime morningStartTime, LocalTime morningEndTime,
-			LocalTime afternoonStartTime, LocalTime afternoonEndTime) {
+			LocalTime afternoonStartTime, LocalTime afternoonEndTime, Availability availability) {
 		this.id = id;
 		this.dayOfWeek = dayOfWeek;
 		this.morningStartTime = morningStartTime;
 		this.morningEndTime = morningEndTime;
 		this.afternoonStartTime = afternoonStartTime;
 		this.afternoonEndTime = afternoonEndTime;
+		this.availability = availability;
 	}
 
 	public Integer getId() {

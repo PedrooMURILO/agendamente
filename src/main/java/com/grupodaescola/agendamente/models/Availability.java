@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class Availability {
 	private Integer id;
 	private Duration duration;
 	
-	@OneToMany(mappedBy = "availability", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "availability", fetch = FetchType.EAGER)
 	private List<WorkSchedule> schedules = new ArrayList<>();
 
 	@OneToOne

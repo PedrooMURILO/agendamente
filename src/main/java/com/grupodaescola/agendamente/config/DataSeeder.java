@@ -55,13 +55,9 @@ public class DataSeeder implements CommandLineRunner {
 		Availability av1 = new Availability(null, Duration.ofMinutes(30), psi1);
 		availabilityRepository.saveAll(Arrays.asList(av1));
 		
-		WorkSchedule w1 = new WorkSchedule(null, DayOfWeek.TUESDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0));
-		WorkSchedule w2 = new WorkSchedule(null, DayOfWeek.THURSDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0));
-		WorkSchedule w3 = new WorkSchedule(null, DayOfWeek.SATURDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0));
-		
-		w1.setAvailability(av1);
-		w2.setAvailability(av1);
-		w3.setAvailability(av1);
+		WorkSchedule w1 = new WorkSchedule(null, DayOfWeek.TUESDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0), av1);
+		WorkSchedule w2 = new WorkSchedule(null, DayOfWeek.THURSDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0), av1);
+		WorkSchedule w3 = new WorkSchedule(null, DayOfWeek.SATURDAY, LocalTime.of(8, 0), LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(18, 0), av1);
 		workScheduleRepository.saveAll(Arrays.asList(w1, w2, w3));
 		
 		Appointment a1 = new Appointment(null, LocalDate.of(2024, 12, 12), LocalTime.of(10, 30), AppointmentStatus.COMPLETED, true, p1, psi1);
