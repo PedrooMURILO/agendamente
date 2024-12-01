@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.repositories.AppointmentRepository;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
+import com.grupodaescola.agendamente.services.exceptions.DatabaseException;
 import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -52,7 +54,14 @@ public class AppointmentService {
 	}
 	
 	public void delete(Integer id) {
-		appointmentRepository.deleteById(id);
+		if (!appointmentRepository.existsById(id)) {
+			throw new ResourceNotFoundException(id);			
+		}
+		try {
+			appointmentRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	@Transactional

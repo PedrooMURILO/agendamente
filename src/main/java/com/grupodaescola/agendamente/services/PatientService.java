@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.grupodaescola.agendamente.dtos.PatientDTO;
 import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
+import com.grupodaescola.agendamente.services.exceptions.DatabaseException;
 import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -36,7 +38,14 @@ public class PatientService {
 	}
 	
 	public void delete(Integer id) {
-		patientRepository.deleteById(id);
+		if (!patientRepository.existsById(id)) {
+			throw new ResourceNotFoundException(id);			
+		}
+		try {
+			patientRepository.deleteById(id);			
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	@Transactional

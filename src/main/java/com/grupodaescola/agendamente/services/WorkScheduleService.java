@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import com.grupodaescola.agendamente.models.Availability;
 import com.grupodaescola.agendamente.models.WorkSchedule;
 import com.grupodaescola.agendamente.repositories.AvailabilityRepository;
 import com.grupodaescola.agendamente.repositories.WorkScheduleRepository;
+import com.grupodaescola.agendamente.services.exceptions.DatabaseException;
 import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -44,7 +46,14 @@ public class WorkScheduleService {
 	}
 	
 	public void delete(Integer id) {
-		workScheduleRepository.deleteById(id);
+		if (!workScheduleRepository.existsById(id)) {
+			throw new ResourceNotFoundException(id);			
+		}
+		try {
+			workScheduleRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	@Transactional
