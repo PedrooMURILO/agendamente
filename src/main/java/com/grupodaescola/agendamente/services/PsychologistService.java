@@ -1,7 +1,6 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grupodaescola.agendamente.dtos.PsychologistDTO;
 import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
+import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class PsychologistService {
@@ -24,8 +24,8 @@ public class PsychologistService {
 	}
 	
 	public PsychologistDTO findById(Integer id) {
-		Optional<Psychologist> psychologist = psychologistRepository.findById(id);
-		return new PsychologistDTO(psychologist.get());
+		Psychologist psychologist = psychologistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		return new PsychologistDTO(psychologist);
 	}
 	
 	public PsychologistDTO insert(PsychologistDTO psychologist) {

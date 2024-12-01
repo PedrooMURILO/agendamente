@@ -1,7 +1,6 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import com.grupodaescola.agendamente.models.Availability;
 import com.grupodaescola.agendamente.models.WorkSchedule;
 import com.grupodaescola.agendamente.repositories.AvailabilityRepository;
 import com.grupodaescola.agendamente.repositories.WorkScheduleRepository;
+import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class WorkScheduleService {
@@ -29,8 +29,8 @@ public class WorkScheduleService {
 	}
 	
 	public WorkScheduleDTO findById(Integer id) {
-		Optional<WorkSchedule> workSchedule = workScheduleRepository.findById(id);
-		return new WorkScheduleDTO(workSchedule.get());
+		WorkSchedule workSchedule = workScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		return new WorkScheduleDTO(workSchedule);
 	}
 	
 	public WorkScheduleDTO insert(WorkScheduleDTO workSchedule) {

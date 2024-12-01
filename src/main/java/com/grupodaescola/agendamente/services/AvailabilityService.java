@@ -1,7 +1,6 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import com.grupodaescola.agendamente.models.Availability;
 import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.repositories.AvailabilityRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
+import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AvailabilityService {
@@ -28,8 +28,8 @@ public class AvailabilityService {
 	}
 	
 	public AvailabilityDTO findById(Integer id) {
-		Optional<Availability> availability = availabilityRepository.findById(id);
-		return new AvailabilityDTO(availability.get());
+		Availability availability = availabilityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		return new AvailabilityDTO(availability);
 	}
 	
 	public AvailabilityDTO insert(AvailabilityDTO availability) {

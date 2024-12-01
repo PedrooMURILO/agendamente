@@ -1,7 +1,6 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import com.grupodaescola.agendamente.models.Psychologist;
 import com.grupodaescola.agendamente.repositories.AppointmentRepository;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
 import com.grupodaescola.agendamente.repositories.PsychologistRepository;
+import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AppointmentService {
@@ -34,8 +34,8 @@ public class AppointmentService {
 	}
 	
 	public AppointmentDTO findById(Integer id) {
-		Optional<Appointment> appointment = appointmentRepository.findById(id);
-		return new AppointmentDTO(appointment.get());
+		Appointment appointment = appointmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		return new AppointmentDTO(appointment);
 	}
 	
 	public AppointmentDTO insert(AppointmentDTO appointment) {

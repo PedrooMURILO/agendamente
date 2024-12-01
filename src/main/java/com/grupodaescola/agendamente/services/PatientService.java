@@ -1,7 +1,6 @@
 package com.grupodaescola.agendamente.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grupodaescola.agendamente.dtos.PatientDTO;
 import com.grupodaescola.agendamente.models.Patient;
 import com.grupodaescola.agendamente.repositories.PatientRepository;
+import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class PatientService {
@@ -24,8 +24,8 @@ public class PatientService {
 	}
 	
 	public PatientDTO findById(Integer id) {
-		Optional<Patient> patient = patientRepository.findById(id);
-		return new PatientDTO(patient.get());
+		Patient patient = patientRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		return new PatientDTO(patient);
 	}
 	
 	public PatientDTO insert(PatientDTO patient) {
