@@ -16,12 +16,14 @@ import com.grupodaescola.agendamente.repositories.WorkScheduleRepository;
 import com.grupodaescola.agendamente.services.exceptions.DatabaseException;
 import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class WorkScheduleService {
 
 	@Autowired
 	private WorkScheduleRepository workScheduleRepository;
-	
+
 	@Autowired
 	private AvailabilityRepository availabilityRepository;
 
@@ -29,12 +31,13 @@ public class WorkScheduleService {
 		List<WorkSchedule> workScheduleList = workScheduleRepository.findAll();
 		return workScheduleList.stream().map(x -> new WorkScheduleDTO(x)).toList();
 	}
-	
+
 	public WorkScheduleDTO findById(Integer id) {
-		WorkSchedule workSchedule = workScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		WorkSchedule workSchedule = workScheduleRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 		return new WorkScheduleDTO(workSchedule);
 	}
-	
+
 	public WorkScheduleDTO insert(WorkScheduleDTO workSchedule) {
 		WorkSchedule savedWorkSchedule = new WorkSchedule();
 		Availability availability = availabilityRepository.findById(workSchedule.getAvailability().getId())
@@ -44,10 +47,10 @@ public class WorkScheduleService {
 		savedWorkSchedule = workScheduleRepository.save(savedWorkSchedule);
 		return new WorkScheduleDTO(savedWorkSchedule);
 	}
-	
+
 	public void delete(Integer id) {
 		if (!workScheduleRepository.existsById(id)) {
-			throw new ResourceNotFoundException(id);			
+			throw new ResourceNotFoundException(id);
 		}
 		try {
 			workScheduleRepository.deleteById(id);
@@ -55,14 +58,18 @@ public class WorkScheduleService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	@Transactional
 	public WorkScheduleDTO update(Integer id, WorkScheduleDTO workSchedule) {
-		WorkSchedule existingWorkSchedule = workScheduleRepository.getReferenceById(id);
-		updateData(existingWorkSchedule, workSchedule);
-		return new WorkScheduleDTO(workScheduleRepository.save(existingWorkSchedule));
+		try {
+			WorkSchedule existingWorkSchedule = workScheduleRepository.getReferenceById(id);
+			updateData(existingWorkSchedule, workSchedule);
+			return new WorkScheduleDTO(workScheduleRepository.save(existingWorkSchedule));
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
-	
+
 	private void updateData(WorkSchedule existingWorkSchedule, WorkScheduleDTO workSchedule) {
 		existingWorkSchedule.setMorningStartTime(workSchedule.getMorningStartTime());
 		existingWorkSchedule.setMorningEndTime(workSchedule.getMorningEndTime());

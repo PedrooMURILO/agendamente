@@ -18,28 +18,31 @@ import com.grupodaescola.agendamente.repositories.PsychologistRepository;
 import com.grupodaescola.agendamente.services.exceptions.DatabaseException;
 import com.grupodaescola.agendamente.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class AppointmentService {
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
-	
+
 	@Autowired
 	private PatientRepository patientRepository;
-	
+
 	@Autowired
 	private PsychologistRepository psychologistRepository;
-	
+
 	public List<AppointmentDTO> findAll() {
 		List<Appointment> appointmentList = appointmentRepository.findAll();
 		return appointmentList.stream().map(x -> new AppointmentDTO(x)).toList();
 	}
-	
+
 	public AppointmentDTO findById(Integer id) {
-		Appointment appointment = appointmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+		Appointment appointment = appointmentRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 		return new AppointmentDTO(appointment);
 	}
-	
+
 	public AppointmentDTO insert(AppointmentDTO appointment) {
 		Appointment savedAppointment = new Appointment();
 		Patient patient = patientRepository.findById(appointment.getPatient().getId())
@@ -52,10 +55,10 @@ public class AppointmentService {
 		savedAppointment = appointmentRepository.save(savedAppointment);
 		return new AppointmentDTO(savedAppointment);
 	}
-	
+
 	public void delete(Integer id) {
 		if (!appointmentRepository.existsById(id)) {
-			throw new ResourceNotFoundException(id);			
+			throw new ResourceNotFoundException(id);
 		}
 		try {
 			appointmentRepository.deleteById(id);
@@ -63,14 +66,18 @@ public class AppointmentService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	@Transactional
 	public AppointmentDTO update(Integer id, AppointmentDTO appointment) {
-		Appointment existingAppointment = appointmentRepository.getReferenceById(id);
-		updateData(existingAppointment, appointment);
-		return new AppointmentDTO(appointmentRepository.save(existingAppointment));
+		try {
+			Appointment existingAppointment = appointmentRepository.getReferenceById(id);
+			updateData(existingAppointment, appointment);
+			return new AppointmentDTO(appointmentRepository.save(existingAppointment));
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
-	
+
 	private void updateData(Appointment existingAppointment, AppointmentDTO appointment) {
 		existingAppointment.setAppointmentStatus(appointment.getAppointmentStatus());
 		existingAppointment.setIsActive(appointment.getIsActive());
