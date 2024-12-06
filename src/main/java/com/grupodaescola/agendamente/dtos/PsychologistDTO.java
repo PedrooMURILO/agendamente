@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grupodaescola.agendamente.models.Appointment;
 import com.grupodaescola.agendamente.models.Psychologist;
 
@@ -15,6 +16,8 @@ public class PsychologistDTO {
 	private String businessName;
 	private String phone;
 	private String email;
+
+	@JsonIgnore
 	private String password;
 	private String professionalLicense;
 	
